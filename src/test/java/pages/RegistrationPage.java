@@ -23,18 +23,21 @@ public class RegistrationPage {
             currentAddressInput = $("#currentAddress"),
             stateInput = $("#state"),
             cityInput = $("#city"),
-            stateSityWrapper = $("#stateCity-wrapper"),
+            stateCityWrapper = $("#stateCity-wrapper"),
             submit = $("#submit");
 
     CalendarComponent calendarComponent = new CalendarComponent();
     TableResultComponent tableResultComponent = new TableResultComponent();
 
-    // private String borderColorValue = "";
-    private final String rgbRedColor = "rgb(220, 53, 69)";
 
     public RegistrationPage openPage() {
         open("/automation-practice-form");
         $(".practice-form-wrapper").shouldHave(text("Student Registration Form"));
+
+        return this;
+    }
+
+    public RegistrationPage removeFooter() {
         executeJavaScript("$('#fixedban').remove()");
         executeJavaScript("$('footer').remove()");
 
@@ -104,14 +107,14 @@ public class RegistrationPage {
 
     public RegistrationPage setState(String value) {
         stateInput.click();
-        stateSityWrapper.$(byText(value)).click();
+        stateCityWrapper.$(byText(value)).click();
 
         return this;
     }
 
     public RegistrationPage setCity(String value) {
         cityInput.click();
-        stateSityWrapper.$(byText(value)).click();
+        stateCityWrapper.$(byText(value)).click();
 
         return this;
     }
@@ -129,9 +132,8 @@ public class RegistrationPage {
     }
 
     public RegistrationPage checkUserNumberHasError() {
+        String rgbRedColor = "rgb(220, 53, 69)";
         userNumberInput.shouldHave(Condition.cssValue("border-color", rgbRedColor));
-//        borderColorValue = userNumberInput.getCssValue("border-color");
-//        Assertions.assertEquals(rgbRedColor, borderColorValue);
 
         return this;
     }

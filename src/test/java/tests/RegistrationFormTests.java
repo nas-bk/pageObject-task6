@@ -10,6 +10,7 @@ public class RegistrationFormTests extends TestBase {
     @Test
     void fillFormTest() {
         registrationPage.openPage()
+                .removeFooter()
                 .setFirstName("Nastya")
                 .setLastName("Bochkareva")
                 .setUserEmail("test@mail.com")
@@ -38,21 +39,23 @@ public class RegistrationFormTests extends TestBase {
     @Test
     void fillRequiredFieldsTest() {
         registrationPage.openPage()
+                .removeFooter()
                 .setFirstName("Rayne")
                 .setLastName("Brimstone")
                 .setGender("Other")
                 .setUserNumber("0000000000")
-                .setDateOfBirth("9", "October", "2002")
+                .setDateOfBirth("30", "October", "2002")
                 .submit()
                 .checkResult("Student Name", "Rayne Brimstone")
                 .checkResult("Gender", "Other")
                 .checkResult("Mobile", "0000000000")
-                .checkResult("Date of Birth", "09 October,2002");
+                .checkResult("Date of Birth", "30 October,2002");
     }
 
     @Test
     void negativeRegistrationTest() {
         registrationPage.openPage()
+                .removeFooter()
                 .setFirstName("Rayne")
                 .setLastName("Brimstone")
                 .setGender("Other")
